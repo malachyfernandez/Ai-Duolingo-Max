@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lingo Max — your AI language tutor</title>
+  <meta name="description" content="An AI-powered language tutor with an expressive talking face. Bring your own OpenRouter key." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Top bar -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">🦜</span>
+        <span class="brand-name">Lingo<span class="brand-accent">Max</span></span>
+      </div>
+      <div class="stats" id="stats" hidden>
+        <div class="stat" title="Streak"><span class="stat-icon">🔥</span><span id="stat-streak">0</span></div>
+        <div class="stat" title="XP"><span class="stat-icon">⚡</span><span id="stat-xp">0</span></div>
+        <div class="stat hearts" title="Hearts" id="stat-hearts"></div>
+      </div>
+      <button class="icon-btn" id="open-settings" title="Settings" aria-label="Settings">⚙️</button>
+    </header>
+
+    <main class="stage">
+      <!-- The tutor face lives here (built by js/face.js) -->
+      <section class="tutor">
+        <div id="face-host" class="face-host" aria-hidden="true"></div>
+        <div class="speech-bubble" id="speech-bubble" hidden>
+          <p id="speech-text"></p>
+          <button class="replay-btn" id="replay-btn" title="Hear it again" aria-label="Replay audio">🔊</button>
+        </div>
+      </section>
+
+      <!-- The lesson card -->
+      <section class="lesson" id="lesson" hidden>
+        <div class="prompt" id="prompt"></div>
+        <div class="task-area" id="task-area"></div>
+        <div class="feedback" id="feedback" hidden></div>
+        <button class="primary-btn" id="check-btn">Check</button>
+      </section>
+
+      <!-- Welcome / start screen -->
+      <section class="welcome" id="welcome">
+        <h1>Meet your AI language tutor.</h1>
+        <p class="lede">
+          A talking, emoting face that quizzes you and reacts in real time.
+          Powered by <strong>your own OpenRouter key</strong> — or try the no-key demo first.
+        </p>
+        <div class="start-grid">
+          <label class="field">
+            <span>I want to learn</span>
+            <select id="lang-select"></select>
+          </label>
+          <label class="field">
+            <span>Topic (optional)</span>
+            <input id="topic-input" type="text" placeholder="travel, food, greetings…" />
+          </label>
+        </div>
+        <div class="start-actions">
+          <button class="primary-btn big" id="start-ai">Start with AI</button>
+          <button class="ghost-btn big" id="start-demo">Try the demo (no key)</button>
+        </div>
+        <p class="key-hint" id="key-hint"></p>
+      </section>
+    </main>
+
+    <footer class="bottombar">
+      <span>Bring-your-own-key · runs entirely in your browser · nothing is stored on a server</span>
+    </footer>
+  </div>
+
+  <!-- Settings modal -->
+  <div class="overlay" id="settings-overlay" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Settings">
+      <div class="modal-head">
+        <h2>Settings</h2>
+        <button class="icon-btn" id="close-settings" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body">
+        <label class="field">
+          <span>OpenRouter API key</span>
+          <input id="api-key" type="password" placeholder="sk-or-v1-…" autocomplete="off" />
+          <small>Stored only in this browser (localStorage). <a href="https://openrouter.ai/keys" target="_blank" rel="noopener">Get a key →</a></small>
+        </label>
+        <label class="field">
+          <span>Model</span>
+          <input id="model-input" type="text" placeholder="openai/gpt-4o-mini" />
+          <small>Any OpenRouter chat model id. Default is a fast, cheap one.</small>
+        </label>
+        <label class="field">
+          <span>Voice</span>
+          <select id="voice-select"></select>
+          <small>Uses your browser's built-in speech. Voices depend on your OS.</small>
+        </label>
+        <div class="field row">
+          <button class="ghost-btn" id="test-voice">Test voice 🔊</button>
+          <button class="danger-btn" id="clear-key">Forget key</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
